@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model certificados_configuracao {
+  certificado_id              Int       @id @default(autoincrement())
+  certificado_curso_id        Int
+  certificado_empresa_id      Int?
+  certificado_usuario_criacao Int?
+  certificado_background      String?   @db.Text
+  certificado_status          Int?
+  certificado_created_at      DateTime? @default(now()) @db.Timestamp(0)
+  certificado_updated_at      DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model certificados_historico {
+  certificado_historico_id              Int       @id @default(autoincrement())
+  certificado_historico_configuracao_id String?   @db.VarChar(100)
+  certificado_historico_aluno_nome      String?   @db.VarChar(255)
+  certificado_historico_link            String?   @db.VarChar(100)
+  certificado_historico_curso_nome      String?   @db.VarChar(100)
+  certificado_historico_data_emissao    String?   @db.VarChar(100)
+  certificado_historico_carga_horaria   String?   @db.VarChar(100)
+  certificado_historico_curso_descricao String?   @db.Text
+  certificado_historico_background      String?   @db.Text
+  certificado_historico_empresa_id      Int?
+  certificado_historico_aluno_id        Int?
+  certificado_historico_created_at      DateTime? @default(now()) @db.Timestamp(0)
+  certificado_historico_updated_at      DateTime? @default(now()) @db.Timestamp(0)
+}
